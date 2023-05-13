@@ -1,0 +1,23 @@
+// Filter data using time stamp from json
+
+<script>
+const jsonData = [
+  {"Deal": "25504", "Time": "1675924231", "Profit": "25.00"},
+  {"Deal": "25505", "Time": "1675965432", "Profit": "35.00"},
+  {"Deal": "25506", "Time": "1675997642", "Profit": "20.00"},
+  {"Deal": "25507", "Time": "1676059852", "Profit": "45.00"}
+];
+
+// Convert start and end dates to Unix timestamps
+const startDate = new Date('2023-02-10');
+const endDate = new Date('2023-05-31');
+const startTimestamp = Math.floor(startDate.getTime() / 1000);
+const endTimestamp = Math.floor(endDate.getTime() / 1000);
+
+// Filter data based on Unix timestamp of Time field
+const filteredData = jsonData.filter(item => {
+  const timestamp = parseInt(item.Time);
+  return timestamp >= startTimestamp && timestamp <= endTimestamp;
+});
+
+console.log(filteredData);
