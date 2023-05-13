@@ -1,0 +1,26 @@
+        $mergedData = []; // Array to store merged data
+
+        // Loop through pages until all data is retrieved
+        while (true) {
+            // Make API request
+            $result = $request->Get("/get_api?login=$accountNumber&from=$startTime&to=$endTime&offset=$offset&total=$limit");
+
+            // Decode the JSON response into an array
+            $data = json_decode($result, true);
+
+            // Add current page of data to merged data array
+            $result['answer'] = array_merge($result['answer'], $data['answer']);
+
+            // Check if there are more pages to retrieve
+            if (count($data['answer']) < $limit) {
+                break;
+            }
+
+            // Update offset to retrieve next page of data
+            $offset += $limit;
+        }
+
+        // Output merged data as JSON
+        echo 'aldsfjk ';
+        echo count($mergedData);
+        echo json_encode($mergedData);
